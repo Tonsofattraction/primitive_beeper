@@ -20,7 +20,7 @@ def parse_options():
         '--melody',
         dest='melody',
         help='melody to beep (available melodies: %s)' % ', '.join(MELODIES.keys()),
-        default='tada',
+        default='beepr',
         action='store',
     )
     return parser.parse_args()
