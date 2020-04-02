@@ -9,7 +9,7 @@ setup(
     ],
     maintainer='Tonsofattraction (kuznetsov.d.p@gmail.com)',
     maintainer_email='kuznetsov.d.p@gmail.com',
-    url='https://github.com/Tonsofattraction/memo',
+    url='https://github.com/Tonsofattraction/primitive_beeper',
     entry_points={
         'console_scripts': [
             'beep = beeper:main',
