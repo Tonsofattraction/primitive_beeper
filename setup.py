@@ -2,8 +2,8 @@ from setuptools import setup
 
 setup(
     name='beep',
-    version='0.3',
-    py_modules=['beeper', 'melodies'],
+    version='0.4',
+    py_modules=['beeper.beeper', 'beeper.melodies'],
     install_requires=[
         'pyaudio',
     ],
@@ -12,7 +12,7 @@ setup(
     url='https://github.com/Tonsofattraction/primitive_beeper',
     entry_points={
         'console_scripts': [
-            'beep = beeper:main',
+            'beep = beeper.beeper:main',
         ],
     },
 )

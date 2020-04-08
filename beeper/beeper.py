@@ -6,7 +6,7 @@ import re
 import sys
 import random
 import time
-from melodies import *
+from .melodies import *
 
 
 def parse_options():
@@ -53,24 +53,6 @@ def parse_duration(duration):
     return sum(parse_token(*token) for token in _re_token.findall(duration))
 
 
-class Timer(threading.Thread):
-
-    def __init__(self, timeout, melody):
-        super(Timer, self).__init__()
-        self.timeout = timeout
-        self.melody = melody
-
-    def run(self):
-        while self.timeout > 0:
-            time.sleep(1)
-            self.timeout -= 1
-            sys.stdout.write("\r%s" % seconds_to_duration_string(self.timeout))
-            sys.stdout.flush()
-        sys.stdout.write("\r\n")
-        sys.stdout.flush()
-        beep(melody=self.melody)
-
-
 def seconds_to_duration_string(seconds):
     string = "beep in "
     days = seconds // (3600 * 24)
@@ -89,6 +71,24 @@ def seconds_to_duration_string(seconds):
     return string
 
 
+class Timer(threading.Thread):
+
+    def __init__(self, timeout, melody):
+        super(Timer, self).__init__()
+        self.timeout = timeout
+        self.melody = melody
+
+    def run(self):
+        while self.timeout > 0:
+            time.sleep(1)
+            self.timeout -= 1
+            sys.stdout.write("\r%s" % seconds_to_duration_string(self.timeout))
+            sys.stdout.flush()
+        beep(melody=self.melody)
+        sys.stdout.write("\r\n")
+        sys.stdout.flush()
+
+
 def beep(melody, tempo=MEDIUM):
     """
     inspired by this stackoverflow answer by Liam (https://stackoverflow.com/users/4879665/liam)
@@ -97,7 +97,7 @@ def beep(melody, tempo=MEDIUM):
     PyAudio = pyaudio.PyAudio     # initialize pyaudio
 
     # See https://en.wikipedia.org/wiki/Bit_rate#Audio
-    BITRATE = 16000    # number of frames per second/frameset.
+    BITRATE = 16000   # number of frames per second/frameset.
     WAVEDATA = ''
     melody = MELODIES.get(melody, MELODIES['beepr'])
     for note in melody:
@@ -127,7 +127,7 @@ def main():
     options = parse_options()
     timeout = parse_duration(options.timeout[0])
     if options.melody == "_random":
-        options.melody = random.choice(MELODIES.keys())
+        options.melody = random.choice(list(MELODIES.keys()))
     timer = Timer(timeout, options.melody)
     timer.start()
     timer.join()
