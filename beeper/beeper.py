@@ -99,7 +99,7 @@ def beep(melody, tempo=MEDIUM):
     PyAudio = pyaudio.PyAudio     # initialize pyaudio
 
     # See https://en.wikipedia.org/wiki/Bit_rate#Audio
-    BITRATE = 16000   # number of frames per second/frameset.
+    BITRATE = 64000   # number of frames per second/frameset.
     WAVEDATA = ''
     melody = MELODIES.get(melody, MELODIES['beepr'])
     for note in melody:
@@ -112,6 +112,7 @@ def beep(melody, tempo=MEDIUM):
             # generating wawes
             for x in range(numberofframes):
                 WAVEDATA += chr(int(math.sin(x/((BITRATE/frequency)/math.pi))*127+128))
+    WAVEDATA += ''.join([chr(128)] * BITRATE)
 
     p = PyAudio()
     stream = p.open(format=p.get_format_from_width(1),
