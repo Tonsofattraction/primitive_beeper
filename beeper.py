@@ -3,6 +3,8 @@ import pyaudio
 import threading
 import argparse
 import re
+import sys
+import time
 from melodies import *
 
 
@@ -50,6 +52,42 @@ def parse_duration(duration):
     return sum(parse_token(*token) for token in _re_token.findall(duration))
 
 
+class Timer(threading.Thread):
+
+    def __init__(self, timeout, melody):
+        super(Timer, self).__init__()
+        self.timeout = timeout
+        self.melody = melody
+
+    def run(self):
+        while self.timeout > 0:
+            time.sleep(1)
+            self.timeout -= 1
+            sys.stdout.write("\r%s" % seconds_to_duration_string(self.timeout))
+            sys.stdout.flush()
+        sys.stdout.write("\r\n")
+        sys.stdout.flush()
+        beep(melody=self.melody)
+
+
+def seconds_to_duration_string(seconds):
+    string = "beep in "
+    days = seconds // (3600 * 24)
+    seconds %= (3600 * 24)
+    hours = seconds // 3600
+    seconds %= 3600
+    minutes = seconds // 60
+    seconds %= 60
+    if days:
+        string += "%dd" % days
+    if hours:
+        string += "%dh" % hours
+    if minutes:
+        string += "%dm" % minutes
+    string += "%ds" % seconds
+    return string
+
+
 def beep(melody, tempo=MEDIUM):
     """
     inspired by this stackoverflow answer by Liam (https://stackoverflow.com/users/4879665/liam)
@@ -87,7 +125,7 @@ def beep(melody, tempo=MEDIUM):
 def main():
     options = parse_options()
     timeout = parse_duration(options.timeout[0])
-    timer = threading.Timer(float(timeout), beep, [options.melody])
+    timer = Timer(timeout, options.melody)
     timer.start()
     timer.join()
 
