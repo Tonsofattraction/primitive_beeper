@@ -5,6 +5,7 @@ import argparse
 import re
 import sys
 import random
+import signal
 import time
 from .melodies import *
 
@@ -78,14 +79,17 @@ class Timer(threading.Thread):
         self.timeout = timeout
         self.melody = melody
 
+        self.stop = threading.Event()
+
     def run(self):
-        while self.timeout > 0:
+        while self.timeout > 0 and not self.stop.is_set():
             time.sleep(1)
             self.timeout -= 1
             print(" %s" % seconds_to_duration_string(self.timeout), end='                  \r')
-        beep(melody=self.melody)
-        sys.stdout.write("\r\n")
-        sys.stdout.flush()
+        if not self.stop.is_set():
+            beep(melody=self.melody)
+        else:
+            print("\nquitting...")
 
 
 def beep(melody, tempo=MEDIUM):
@@ -128,6 +132,10 @@ def main():
     if options.melody == "_random":
         options.melody = random.choice(list(MELODIES.keys()))
     timer = Timer(timeout, options.melody)
+
+    def handler(signum, frame):
+        timer.stop.set()
+    signal.signal(signal.SIGINT, handler)
     timer.start()
     timer.join()
 
