@@ -62,12 +62,12 @@ def seconds_to_duration_string(seconds):
     minutes = seconds // 60
     seconds %= 60
     if days:
-        string += "%dd" % days
+        string += f"{days}d"
     if hours:
-        string += "%dh" % hours
+        string += f"{hours}h"
     if minutes:
-        string += "%dm" % minutes
-    string += "%ds" % seconds
+        string += f"{minutes}m"
+    string += f"{seconds}s"
     return string
 
 
