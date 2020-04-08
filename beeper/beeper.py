@@ -82,8 +82,7 @@ class Timer(threading.Thread):
         while self.timeout > 0:
             time.sleep(1)
             self.timeout -= 1
-            sys.stdout.write("\r%s" % seconds_to_duration_string(self.timeout))
-            sys.stdout.flush()
+            print(" %s" % seconds_to_duration_string(self.timeout), end='                  \r')
         beep(melody=self.melody)
         sys.stdout.write("\r\n")
         sys.stdout.flush()

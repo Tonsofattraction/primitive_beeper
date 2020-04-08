@@ -7,6 +7,7 @@ setup(
     install_requires=[
         'pyaudio',
     ],
+    python_requires='>3.5.2',
     maintainer='Tonsofattraction (kuznetsov.d.p@gmail.com)',
     maintainer_email='kuznetsov.d.p@gmail.com',
     url='https://github.com/Tonsofattraction/primitive_beeper',
