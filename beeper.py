@@ -23,7 +23,7 @@ def parse_options():
         '--melody',
         dest='melody',
         help='melody to beep (available melodies: %s)' % ', '.join(MELODIES.keys()),
-        default='random',
+        default='_random',
         action='store',
     )
     return parser.parse_args()
@@ -126,7 +126,7 @@ def beep(melody, tempo=MEDIUM):
 def main():
     options = parse_options()
     timeout = parse_duration(options.timeout[0])
-    if options.melody == "random":
+    if options.melody == "_random":
         options.melody = random.choice(MELODIES.keys())
     timer = Timer(timeout, options.melody)
     timer.start()
