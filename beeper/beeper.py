@@ -15,7 +15,7 @@ def parse_options():
     parser.add_argument(
         'timeout',
         nargs=1,
-        help='Time after which it will beep. You can use "d","h","m","s" multipliers like this 1d3h2m3s',
+        help='Time before beep. You can use "d","h","m","s" multipliers like this 1d3h2m3s',
         default='',
         action='store',
     )
