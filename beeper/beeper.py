@@ -3,7 +3,6 @@ import pyaudio
 import threading
 import argparse
 import re
-import sys
 import random
 import signal
 import time
