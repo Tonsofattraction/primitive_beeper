@@ -91,7 +91,7 @@ class Timer(threading.Thread):
             print("\nquitting...")
 
 
-def beep(melody, tempo=MEDIUM):
+def beep(melody):
     """
     inspired by this stackoverflow answer by Liam (https://stackoverflow.com/users/4879665/liam)
     https://stackoverflow.com/a/33880295/2361957
@@ -102,9 +102,9 @@ def beep(melody, tempo=MEDIUM):
     BITRATE = 64000   # number of frames per second/frameset.
     WAVEDATA = ''
     melody = MELODIES.get(melody, MELODIES['beepr'])
-    for note in melody:
+    for note in melody["notes"]:
         frequency = note[1]
-        length = note[0] * tempo
+        length = note[0] * melody["tempo"]
         numberofframes = int(BITRATE * length)
         if note[1] == PAUSE:
             WAVEDATA += ''.join([chr(128)] * numberofframes)
