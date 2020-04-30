@@ -16,8 +16,11 @@ PAUSE = 0
 
 #LENGTHS
 WHOLE = 1
+WHOLEPLUS = 1.5
 HALF = 0.5
+HALFPLUS = 0.75
 QUARTER = 0.25
+QUARTERPLUS = 0.375
 EIGHTH = 0.125
 SIXTEENTH = 0.0625
 
@@ -80,6 +83,37 @@ MELODIES = {
             (WHOLE, B_FLAT),
             (WHOLE, G),
             (WHOLE, G),
+        )
+    },
+    "lotr": {
+        "tempo": SLOW,
+        "notes": (
+            (HALFPLUS, G),
+            (WHOLE, G_SHAP),
+            (QUARTER, G),
+            (QUARTER, G_SHAP),
+            (QUARTER, G),
+            (QUARTER, F),
+            (QUARTER, G_SHAP),
+            (HALFPLUS, G),
+            (WHOLEPLUS, C),
+        )
+    },
+    "loom": {
+        "tempo": MEDIUM,
+        "notes": (
+            (HALF, F),
+            (HALF, E),
+            (HALF, F),
+            (WHOLE, D),
+            (WHOLE, A),
+            (HALF, F),
+            (QUARTER, F),
+            (QUARTER, F),
+            (HALF, D),
+            (HALF, E),
+            (WHOLE, F),
+            (WHOLE, D),
         )
     }
 }
