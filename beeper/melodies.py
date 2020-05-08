@@ -7,7 +7,7 @@ E = 659.255
 F = 698.456
 F_SHARP = G_FLAT = 739.989
 G = 783.991
-G_SHAP = A_FLAT = 830.609
+G_SHARP = A_FLAT = 830.609
 A = 880.000
 A_SHARP = B_FLAT = 932.328
 B = 987.767
@@ -86,15 +86,15 @@ MELODIES = {
         )
     },
     "lotr": {
-        "tempo": SLOW,
+        "tempo": MEDIUM,
         "notes": (
-            (HALFPLUS, G),
-            (WHOLE, G_SHAP),
+            (WHOLE, G),
+            (WHOLE, G_SHARP),
             (QUARTER, G),
-            (QUARTER, G_SHAP),
+            (QUARTER, G_SHARP),
             (QUARTER, G),
             (QUARTER, F),
-            (QUARTER, G_SHAP),
+            (QUARTER, G_SHARP),
             (HALFPLUS, G),
             (WHOLEPLUS, C),
         )
@@ -115,5 +115,23 @@ MELODIES = {
             (WHOLE, F),
             (WHOLE, D),
         )
-    }
+    },
+    "digger": {
+        "tempo": FAST,
+        "notes": (
+            (QUARTER, B),
+            (QUARTER, PAUSE),
+            (QUARTER, A),
+            (QUARTER, PAUSE),
+            (QUARTER, B),
+            (QUARTER, PAUSE),
+            (QUARTER, G),
+            (QUARTER, PAUSE),
+            (QUARTER, E),
+            (QUARTER, PAUSE),
+            (QUARTER, G),
+            (QUARTER, PAUSE),
+            (QUARTER, C),
+        )
+    },
 }

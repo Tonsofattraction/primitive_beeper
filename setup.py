@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='beep',
-    version='0.8',
+    version='0.9',
     py_modules=['beeper.beeper', 'beeper.melodies'],
     install_requires=[
         'pyaudio',
